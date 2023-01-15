@@ -26,26 +26,6 @@ struct ContentView: View {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 struct CardModalView: View {
     @State private var offsets = (top: CGFloat.zero, middle: CGFloat.zero, bottom: CGFloat.zero)
     @State private var offset: CGFloat = .zero
