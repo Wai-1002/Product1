@@ -98,6 +98,8 @@ struct HomeTabView: View {
                     .scaleEffect(x: 3.0, y: 3.0)
                     .frame(width: 100, height: 100)
                 Text("HOME").font(.system(size: 20))
+                Text("まつもとぱいせん")
+                    .font(.system(size: 100))
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(red: 0.5, green: 0.9, blue: 0.9))
