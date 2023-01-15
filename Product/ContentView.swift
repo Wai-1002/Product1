@@ -13,14 +13,15 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
-            
             TabView(selection: $selectedTag) {
-                HomeTabView().tag(1)
+                ZStack{
+                    HomeTabView().tag(1)
+                    CardModalView()
+                }
                 WeatherTabView().tag(2)
             }
             .tabViewStyle(PageTabViewStyle())
             .ignoresSafeArea()
-            CardModalView()
         }
     }
 }
@@ -35,7 +36,7 @@ struct CardModalView: View {
             VStack (spacing: 30) {
                 RoundedRectangle(cornerRadius: 5)
                     .foregroundColor(.gray)
-                    .frame(width: 100, height: 10)
+                    .frame(width: 100, height: 5)
                 Text("CardModal")
                     .font(.largeTitle)
                 Spacer()
@@ -43,13 +44,12 @@ struct CardModalView: View {
             .padding()
             .frame(width: geometry.size.width, height: geometry.size.height)
             .background(Color.yellow)
-            .clipShape(RoundedRectangle(cornerRadius: min(self.offset, 20) ))
             .animation(.interactiveSpring())
             .onAppear {
                 self.offsets = (
                     top: .zero,
                     middle: geometry.size.height / 2,
-                    bottom: geometry.size.height * 3 / 4
+                    bottom: geometry.size.height * 9 / 10
                 )
                 self.offset = self.offsets.bottom
                 self.lastOffset = self.offset
@@ -93,24 +93,16 @@ struct CardModalView: View {
 struct HomeTabView: View {
     @State var isModal: Bool = false
     var body: some View {
-        VStack {
-            Image(systemName: "music.note.house")
-                .scaleEffect(x: 3.0, y: 3.0)
-                .frame(width: 100, height: 100)
-            Text("HOME").font(.system(size: 20))
-            Button(action: {
-                isModal = true
-            }) {
-                Text("作成")
+            VStack {
+                Image(systemName: "music.note.house")
+                    .scaleEffect(x: 3.0, y: 3.0)
+                    .frame(width: 100, height: 100)
+                Text("HOME").font(.system(size: 20))
             }
-            .sheet(isPresented: $isModal){
-                SomeView()
-            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(red: 0.5, green: 0.9, blue: 0.9))
+            .ignoresSafeArea()
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(red: 0.5, green: 0.9, blue: 0.9))
-        .ignoresSafeArea()
-    }
 }
 
 struct SomeView: View {
@@ -184,8 +176,5 @@ struct WeatherTabView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-        SomeView()
-        HomeTabView()
-        WeatherTabView()
     }
 }
