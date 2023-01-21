@@ -24,7 +24,7 @@ struct ContentView: View {
 }
 
 struct HomeTabView: View {
-    @State var isModal: Bool = false
+    @State var isModal: Bool = true
     var body: some View {
             VStack {
                 Image(systemName: "music.note.house")
@@ -34,7 +34,7 @@ struct HomeTabView: View {
                 Button(action:{
                     isModal = true
                 }) {
-                    Text("tesut")
+                    Text("test")
                 }
                 .sheet(isPresented: $isModal){
                     SomeView()
@@ -47,8 +47,15 @@ struct HomeTabView: View {
 }
 
 struct SomeView: View {
+    @State var name: String = ""
     var body: some View {
-        Text("ここに予定を入れる")
+        Text("ここに何してたかを入れる")
+
+        TextField("その他", text: $name)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .frame(width: 250)
+        Text("編集可能のボタンを追加する")
+        Text("色分けするボダンを追加する")
     }
 }
 
@@ -105,6 +112,7 @@ struct WeatherTabView: View {
                     .foregroundColor(.white)
                     .clipShape(Circle())
             }
+            Text("ここで分析する")
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(red: 1.0, green: 0.9, blue: 1.0))
